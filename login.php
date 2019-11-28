@@ -8,6 +8,8 @@
     $username = "";
     $password = "";
 
+    $log_confirm = "";
+
     if(isset($_POST["submit"])){
 
         //Check that login information is not empty
@@ -43,9 +45,18 @@
 
             print_r($emps);
 
-            if($emps[0]["password_hash"] == $password){
-                echo "SUCCESSS!!!!!!!!";
+            if(sizeof($emps) > 0){
+                if($emps[0]["password_hash"] == $password){
+                    $log_confirm=  "LOGGED IN";
+                }
+                else{
+                    $log_confirm=  "Wrong password";
+                }
             }
+            else{
+                $log_confirm= "No such username found";
+            }
+            
 
 
             //Free result from memory
@@ -80,7 +91,11 @@
 
             </div>
 
+            <div class="green-text"> <?php echo $log_confirm;?></div>
+
         </form>
     </section>
 
+
+    <?php include('templates/footer.php'); ?>
 </html>
