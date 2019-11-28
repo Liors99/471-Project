@@ -31,10 +31,9 @@
         //If there are no errors (applys lambda function to every element in array, and checks that it is not empty)
         if(!array_filter($errors)){
             
-            //header("Location: index.php");
-
+            $username_passed = mysqli_real_escape_string($connection, $username); //"Sanitize" input (should be changed to prepared statements)
             //Make query
-            $sql = "SELECT password_hash FROM employee WHERE username = '$username' " ; //MIND THE SINGLE QUOUTE
+            $sql = "SELECT password_hash FROM employee WHERE username = '$username_passed' " ; //MIND THE SINGLE QUOUTE
 
             //get results
             $results = mysqli_query($connection, $sql);
