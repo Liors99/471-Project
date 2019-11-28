@@ -47,6 +47,7 @@
             if(sizeof($emps) > 0){
                 if($emps[0]["password_hash"] == $password){
                     $log_confirm=  "LOGGED IN";
+                    header("Location: admin/admin_home.php");
                 }
                 else{
                     $log_confirm=  "Wrong password";
