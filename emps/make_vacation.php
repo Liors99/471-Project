@@ -1,9 +1,9 @@
 <?php
-    $props=["Vacation Start" => "", "Vacatoin End" => ""];
-
-    
-
+require("../config/db_connect.php");
+include ("logged_emp_header.php"); 
+    $props=["Vacation Start" => "", "Vacation End" => ""];
 ?>
+
 <html>
 
       <script type="text/JavaScript">

@@ -23,6 +23,12 @@
     </style>
 </head>
 
+<html>
+<?php
+    session_start();
+    $user = $_SESSION["currentUser"]; 
+    echo $user?>
+</html>
 
 <body class = "grey lighten-4">
     <nav class = "white z-depth-0">

@@ -1,7 +1,8 @@
 <?php 
-
+    include("templates/header.php"); 
     require("config/db_connect.php");
 
+    $_SESSION["currentUser"] = "null"; 
 
     //Make query
     $sql = "SELECT * FROM employee";
@@ -26,7 +27,6 @@
 
 <html>
 <?php  
-    include("templates/header.php"); 
     include("templates/footer.php");
 ?>
 

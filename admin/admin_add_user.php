@@ -1,9 +1,9 @@
 <?php
-    $props=["id" => "", "FName" => "", "LName" => "", "phone_number" => "", "job_type" => "", "start_date" => "", "hourly_wage" => "", "email" => "", "adr_street" => "", "adr_streetnumber" => "", "password" => ""];
-
-    
+include ("logged_admin_header.php"); 
+$props=["id" => "", "FName" => "", "LName" => "", "phone_number" => "", "job_type" => "", "start_date" => "", "hourly_wage" => "", "email" => "", "adr_street" => "", "adr_streetnumber" => "", "password" => ""];
 
 ?>
+
 <html>
 
       <script type="text/JavaScript">
@@ -13,8 +13,6 @@
 
       </script>
 
-
-    <?php include('logged_admin_header.php'); ?>
     <section class= "container grey-text">
         <h4 class="center"> Add a user </h4>
     <form class ="white" action="login.php" method="POST">

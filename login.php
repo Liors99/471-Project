@@ -1,5 +1,5 @@
 <?php 
-
+    include('templates/header.php');
     require("config/db_connect.php");
 
     $errors=array("user"=>"", "pass" => "");
@@ -7,9 +7,9 @@
     //Initialized to keep to persistent, i.e. after invalid submission, values do not reset.
     $username = "";
     $password = "";
-
     $log_confirm = "";
 
+    
     if(isset($_POST["submit"])){
 
         //Check that login information is not empty
@@ -27,7 +27,7 @@
         else {
             $password = htmlspecialchars($_POST["password"]) ;
         }
-
+        
         //If there are no errors (applys lambda function to every element in array, and checks that it is not empty)
         if(!array_filter($errors)){
             
@@ -39,8 +39,10 @@
 
             if(sizeof($emps) > 0){
                 if($emps[0]["password_hash"] == $password){
+                    
                     $log_confirm=  "LOGGED IN";
-
+                    $_SESSION["currentUser"] = $username;
+                    
                     $sql = "SELECT * FROM admin WHERE Employee_ID in (SELECT Employee_ID FROM employee WHERE username = '$username_passed')";
                     
                     $admins = getQueryResults($sql);
@@ -75,7 +77,6 @@
 ?>
 
 <html>
-    <?php include('templates/header.php'); ?>
     <section class= "container grey-text">
         <h4 class="center"> Login</h4>
         <form class ="white" action="login.php" method="POST"> 
