@@ -35,19 +35,25 @@
             //Make query
             $sql = "SELECT password_hash FROM employee WHERE username = '$username_passed' " ; //MIND THE SINGLE QUOUTE
 
-            //get results
-            $results = mysqli_query($connection, $sql);
-
-            //fetch resulting rows as arrays
-            $emps = mysqli_fetch_all($results, MYSQLI_ASSOC);
-            
-
-            print_r($emps);
+            $emps = getQueryResults($sql);
 
             if(sizeof($emps) > 0){
                 if($emps[0]["password_hash"] == $password){
                     $log_confirm=  "LOGGED IN";
-                    header("Location: admin/admin_home.php");
+
+                    $sql = "SELECT * FROM admin WHERE Employee_ID in (SELECT Employee_ID FROM employee WHERE username = '$username_passed')";
+                    
+                    $admins = getQueryResults($sql);
+
+                    if(sizeof($admins)>0){
+                        //If the current user is an admin, redirect to the admin page
+                        header("Location: admin/admin_home.php");
+                    }
+                    else{
+                        //Else, redirect to the employee's page
+                        header("Location: emps/emps_home.php");
+                    }
+                    
                 }
                 else{
                     $log_confirm=  "Wrong password";
@@ -56,11 +62,6 @@
             else{
                 $log_confirm= "No such username found";
             }
-            
-
-
-            //Free result from memory
-            mysqli_free_result($results);
 
             //Close connection to database
             mysqli_close($connection);
@@ -83,7 +84,7 @@
             <div class="red-text"> <?php echo $errors["user"];?></div> 
 
             <label > Password: </label>
-            <input type="text" name="password" value=<?php echo $password;?>>
+            <input type="password" name="password" value=<?php echo $password;?>>
             <div class="red-text"> <?php echo $errors["pass"];?></div>  
 
             <div class="center">

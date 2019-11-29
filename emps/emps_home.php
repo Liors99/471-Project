@@ -1,5 +1,5 @@
 <html>
- <?php include ("../templates/logged_header.php"); ?>
+ <?php include ("logged_emp_header.php"); ?> ?>
 
  <div class="center">
     <a href="emps_appointments.php" class="waves-effect waves-light btn-large">View Appointments</a>

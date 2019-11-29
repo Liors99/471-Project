@@ -14,7 +14,7 @@
       </script>
 
 
-    <?php include('../templates/logged_header.php'); ?>
+    <?php include('logged_emp_header.php'); ?>
     <section class= "container grey-text">
         <h4 class="center"> Create Vacation </h4>
     <form class ="white" action="login.php" method="POST">

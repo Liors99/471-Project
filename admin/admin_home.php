@@ -1,5 +1,5 @@
 <html>
- <?php include ("../templates/logged_header.php"); ?>
+ <?php include ("logged_admin_header.php"); ?>
 
  <div class="center">
     <a href="admin_add_user.php" class="waves-effect waves-light btn-large">Add users</a>
