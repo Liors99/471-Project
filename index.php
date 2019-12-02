@@ -2,8 +2,6 @@
     include("templates/header.php"); 
     require("config/db_connect.php");
 
-    $_SESSION["currentUser"] = "null"; 
-
     //Make query
     $sql = "SELECT * FROM employee";
 

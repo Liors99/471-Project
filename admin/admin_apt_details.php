@@ -6,10 +6,12 @@
     //Check GET request ID parameter
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($connection , $_GET["id"]);
+        $startTime = mysqli_real_escape_string($connection , $_GET["startTime"]);
+        $startDate = mysqli_real_escape_string($connection , $_GET["startDate"]);
 
         if(!empty($_POST["approve"])){
 
-            $sql = "UPDATE appointment SET approved_flag = 1  WHERE Employee_ID = '$id' ";
+            $sql = "UPDATE appointment SET approved_flag = 1  WHERE Employee_ID = '$id' AND start_time = '$startTime' AND appt_date = '$startDate'";
             execQuery($sql);
 
             
@@ -17,14 +19,14 @@
             execQuery($sql);
         }
         elseif(!empty($_POST["deny"])){
-            $sql = "UPDATE appointment SET approved_flag = 0  WHERE Employee_ID = '$id' ";
+            $sql = "UPDATE appointment SET approved_flag = 0  WHERE Employee_ID = '$id' AND start_time = '$startTime' AND appt_date = '$startDate'";
             execQuery($sql);
 
             $sql = "UPDATE request SET approved_id = '$this_user_id' WHERE Employee_ID = '$id'";
             execQuery($sql);
         }
 
-        $sql =  "SELECT * FROM appointment WHERE Employee_ID = '$id'";
+        $sql =  "SELECT * FROM appointment WHERE Employee_ID = '$id' AND start_time = '$startTime' AND appt_date = '$startDate' ";
 
         $res = getQueryResults($sql);
 
@@ -45,6 +47,8 @@
 <html>
 <?php include ("logged_admin_header.php"); ?>
 
+<a class="waves-effect waves-light btn-small" href="admin_view_req.php">Back</a>
+
 
 <div class="container center">
 
@@ -58,8 +62,9 @@
         <h4> Date requested: <?php echo $res[0]["date_requested"]?></h4>
 
         <h4> Approved: <?php  
-                if($res[0]["approved_flag"]){ echo "YES";}
-                else{ echo "NO" ;}
+                if($res[0]["approved_flag"] == 1){ echo "YES";}
+                elseif($res[0]["approved_flag"] == 0){ echo "NO" ;}
+                else{echo "NOT YET SET";}
                 ?>
         
         

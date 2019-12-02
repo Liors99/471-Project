@@ -32,12 +32,14 @@
                 $output_string="#";
                 if($req["type"] == "apt"){
                     $type_file = "admin_apt_details.php";
+                    $output_string = $type_file . "?id=" . $req["Employee_ID"] . "&startTime=" . $req["start_time"] . "&startDate=" . $req["start_date"];
                 }
                 else{
                     $type_file = "admin_vac_details.php";
+                    $output_string = $type_file . "?id=" . $req["Employee_ID"] . "&startDate=" . $req["start_date"];
                 }
                     
-                $output_string = $type_file . "?id=" . $req["Employee_ID"];
+                
 
                 ?>
                 <tr onclick="window.location='<?php echo $output_string;?>';">

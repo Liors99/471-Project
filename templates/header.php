@@ -25,6 +25,7 @@
 <html>
 <?php
     session_start();
+    $_SESSION["currentUser"] = NULL; 
     $user = $_SESSION["currentUser"]; 
     echo $user?>
 </html>

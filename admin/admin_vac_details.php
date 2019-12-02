@@ -6,10 +6,11 @@
     //Check GET request ID parameter
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($connection , $_GET["id"]);
+        $startDate = mysqli_real_escape_string($connection , $_GET["startDate"]);
 
         if(!empty($_POST["approve"])){
 
-            $sql = "UPDATE vacation SET approved_flag = 1  WHERE Employee_ID = '$id' ";
+            $sql = "UPDATE vacation SET approved_flag = 1  WHERE Employee_ID = '$id' AND start_date = '$startDate' ";
             execQuery($sql);
 
             
@@ -17,14 +18,14 @@
             execQuery($sql);
         }
         elseif(!empty($_POST["deny"])){
-            $sql = "UPDATE vacation SET approved_flag = 0  WHERE Employee_ID = '$id' ";
+            $sql = "UPDATE vacation SET approved_flag = 0  WHERE Employee_ID = '$id' AND start_date = '$startDate' ";
             execQuery($sql);
 
             $sql = "UPDATE request SET approved_id = '$this_user_id' WHERE Employee_ID = '$id'";
             execQuery($sql);
         }
 
-        $sql =  "SELECT * FROM vacation WHERE Employee_ID = '$id'";
+        $sql =  "SELECT * FROM vacation WHERE Employee_ID = '$id' AND start_date = '$startDate' ";
 
         $res = getQueryResults($sql);
 
@@ -44,6 +45,8 @@
 
 <html>
 <?php include ("logged_admin_header.php"); ?>
+
+<a class="waves-effect waves-light btn-small" href="admin_view_req.php">Back</a>
 
 
 <div class="container center">
