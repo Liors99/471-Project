@@ -1,10 +1,8 @@
 <?php 
 
-    session_start();
-    $user = $_SESSION["currentUser"]; 
-    echo $user; 
-
     require("../config/db_connect.php");
+    require("admin_session.php");
+
     //Check GET request ID parameter
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($connection , $_GET["id"]);
@@ -14,11 +12,15 @@
             $sql = "UPDATE appointment SET approved_flag = 1  WHERE Employee_ID = '$id' ";
             execQuery($sql);
 
-            $sql = "UPDATE request SET approved_id = '$user' WHERE Employee_ID = '$id'";
+            
+            $sql = "UPDATE request SET approved_id = '$this_user_id' WHERE Employee_ID = '$id'";
             execQuery($sql);
         }
         elseif(!empty($_POST["deny"])){
             $sql = "UPDATE appointment SET approved_flag = 0  WHERE Employee_ID = '$id' ";
+            execQuery($sql);
+
+            $sql = "UPDATE request SET approved_id = '$this_user_id' WHERE Employee_ID = '$id'";
             execQuery($sql);
         }
 

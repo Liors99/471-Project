@@ -1,7 +1,6 @@
 <?php 
-    session_start();
-    $user = $_SESSION["currentUser"];
-    echo $user;
+    require("../config/db_connect.php");
+    require("admin_session.php");
 
 ?>
 
@@ -14,6 +13,11 @@
 
 <div class="center">
     <a href="admin_view_req.php" class="waves-effect waves-light btn-large">View Requests</a>
+</div>
+
+
+<div class="center">
+    <a href="admin_view_emps.php" class="waves-effect waves-light btn-large">View All Employees</a>
 </div>
 
 <?php include ("../templates/footer.php") ; ?>
