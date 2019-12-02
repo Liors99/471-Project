@@ -1,6 +1,5 @@
 <?php
 require("../config/db_connect.php");
-include ("logged_emp_header.php"); 
     $props=["Vacation Start" => "", "Vacation End" => ""];
 ?>
 

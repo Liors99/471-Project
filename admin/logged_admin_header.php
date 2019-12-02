@@ -7,11 +7,11 @@
 
     <style type="text/css">
         .brand{
-            background: #cbb09c !important;
+            background: #296d98 !important;
         }
 
         .brand-text{
-            color: #cbb09c !important;
+            color: #296d98 !important;
         }
 
         form{
@@ -20,6 +20,10 @@
             padding: 20px
 
         }
+
+        #hover_table td:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -27,17 +31,18 @@
 <?php
     session_start();
     $user = $_SESSION["currentUser"]; 
-    echo $user?>
+
+?>
 </html>
 
-<body class = "grey lighten-4">
-    <nav class = "white z-depth-0">
+<body class = "blue lighten-5">
+    <nav class = "blue lighten-3 z-depth-0">
         <div class= "container"> 
-            <a href= "admin_home.php" class="center brand-logo brand-text"> PROJECT 471</a>
+            <a href="admin_home.php" class="center brand-logo brand-text"> PROJECT 471</a>
 
             <ul id="nav-mobile" class = "right hide-on-small-and-down"> 
             
-                <li> <a href="../index.php" class="btn brand z-depth-0"> Logout </a> </li>
+                <li> <a href="../index.php" class= "btn brand z-depth-0"> Logout </a> </li>
             </ul>
         </div>
     </nav>

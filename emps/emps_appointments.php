@@ -6,7 +6,7 @@
 
 <table>
 	<tr>
-		<th>Name</th>	<!-- These Are the Headers -->
+		<th>Type </th>	<!-- These Are the Headers -->
 		<th>Appointment Date</th>
 		<th>Apointment time</th>
         <th>End Time</th>
@@ -24,7 +24,7 @@
             //fetch resulting rows as arrays
             //$emps = mysqli_fetch_all($results, MYSQLI_ASSOC);
             while($result = mysqli_fetch_assoc($results)) {
-                //print_r($result);
+
                 $aDate = ($result["appt_date"]);
                 $sTime = ($result["start_time"]);
                 $eTime = ($result["end_time"]);

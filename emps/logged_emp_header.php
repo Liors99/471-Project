@@ -7,11 +7,11 @@
 
     <style type="text/css">
         .brand{
-            background: #cbb09c !important;
+            background: #296d98 !important;
         }
 
         .brand-text{
-            color: #cbb09c !important;
+            color: #296d98 !important;
         }
 
         form{
@@ -30,8 +30,8 @@
     echo $user?>
 </html>
 
-<body class = "grey lighten-4">
-    <nav class = "white z-depth-0">
+<body class = "blue lighten-5">
+    <nav class = "blue lighten-3 z-depth-0">
         <div class= "container"> 
             <a href= "emps_home.php" class="center brand-logo brand-text"> PROJECT 471</a>
 

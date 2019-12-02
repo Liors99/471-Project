@@ -1,6 +1,5 @@
 <?php
 require("../config/db_connect.php");
-include ("logged_emp_header.php"); 
 $props=["Appointment date" => "", "Start Time" => "", "End Time" => ""];
 ?>
 <html>

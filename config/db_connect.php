@@ -20,6 +20,13 @@
         return $fethed_results;
     }
 
+    //Executes a query (does not get the results)
+    function execQuery($sql){
+        global $connection;
+        mysqli_query($connection, $sql);
+
+    }
+
     //Check connection
     if(!$connection){
         echo "Connection error" . mysqli_connect_error();
