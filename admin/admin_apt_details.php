@@ -1,5 +1,9 @@
 <?php 
 
+    session_start();
+    $user = $_SESSION["currentUser"]; 
+    echo $user; 
+
     require("../config/db_connect.php");
     //Check GET request ID parameter
     if(isset($_GET["id"])){
@@ -8,6 +12,9 @@
         if(!empty($_POST["approve"])){
 
             $sql = "UPDATE appointment SET approved_flag = 1  WHERE Employee_ID = '$id' ";
+            execQuery($sql);
+
+            $sql = "UPDATE request SET approved_id = '$user' WHERE Employee_ID = '$id'";
             execQuery($sql);
         }
         elseif(!empty($_POST["deny"])){

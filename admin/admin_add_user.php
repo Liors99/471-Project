@@ -1,6 +1,10 @@
 <?php
-include ("logged_admin_header.php"); 
-$props=["id" => "", "FName" => "", "LName" => "", "phone_number" => "", "job_type" => "", "start_date" => "", "hourly_wage" => "", "email" => "", "adr_street" => "", "adr_streetnumber" => "", "password" => ""];
+    session_start();
+    $user = $_SESSION["currentUser"]; 
+    echo $user;
+    
+    include ("logged_admin_header.php"); 
+    $props=["id" => "", "FName" => "", "LName" => "", "phone_number" => "", "job_type" => "", "start_date" => "", "hourly_wage" => "", "email" => "", "adr_street" => "", "adr_streetnumber" => "", "password" => ""];
 
 ?>
 

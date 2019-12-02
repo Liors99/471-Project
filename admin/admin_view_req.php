@@ -1,5 +1,9 @@
 <?php 
 
+    session_start();
+    $user = $_SESSION["currentUser"];
+    echo $user;
+    
     require("../config/db_connect.php");
 
     $sql = "SELECT * FROM request";

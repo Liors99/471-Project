@@ -1,3 +1,10 @@
+<?php 
+    session_start();
+    $user = $_SESSION["currentUser"];
+    echo $user;
+
+?>
+
 <html>
  <?php include ("logged_admin_header.php"); ?>
 
