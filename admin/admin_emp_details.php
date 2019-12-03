@@ -23,6 +23,10 @@
        
     }
 
+    if(isset($_POST["submit"])){
+        
+    }
+
 ?>
 
 <html>
@@ -32,7 +36,7 @@
 
     <?php if($res): ?>
 
-        <form class ="white" action="login.php" method="POST"> 
+        <form class ="white" action="admin_emp_details.php" method="POST"> 
             <label > Fist Name: </label>
             <input type="text" name="fname" value=<?php echo $emp_fn;?> >
 
@@ -51,16 +55,9 @@
             <label > Hourly Wage: </label>
             <input type="text" name="lname" value=<?php echo $emp_wage;?>>
 
+            <label > Start date: </label>
+            <input type="text" id="date" class="datepicker" value=<?php echo $emp_startdate;?>>
 
-            
-                <select>
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                </select>
-                <label>Materialize Select</label>
-         
 
             <div class="center">
                 <input type="submit" name = "submit" value="submit" class = "btn brand z-depth-0">
@@ -69,21 +66,20 @@
 
         </form>
 
-
-        <form class ="blue lighten-5" action="admin_apt_details.php?id=<?php echo $emp_id?> " method="POST">
-            <div class="center">
-                <input type="submit" name = "approve" value="approve" class = "btn green z-depth-0">
-                <input type="submit" name = "deny" value="deny" class = "btn red z-depth-0">
-            </div>
-        </form>
-
-
     <?php else: ?>
 
         <h5> No such appoitment found!</h5>
 
     <?php endif?>
 
+    <!-- Script for calendar view -->
+    <script>
+        const Calendar = document.querySelector('.datepicker');
+            M.Datepicker.init(Calendar, {
+                format: 'yyyy-mm-dd'
 
-<?php include ("../templates/footer.php") ; ?>
+            });
+    </script>
+
+    <?php include ("../templates/footer.php") ; ?>
 </html>
