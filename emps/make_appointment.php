@@ -12,7 +12,7 @@ $endTime = "";
 $currentDate = date('m-d-Y');
 echo $currentDate;
 
-    if(isset($_POST["submit"])){
+    if(isset($_POST["Create Request"])){
     
         $apptDate = mysqli_real_escape_string($connection, $_POST["startDate"]);
         $startTime = mysqli_real_escape_string($connection, $_POST["startTime"]);

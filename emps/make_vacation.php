@@ -11,7 +11,7 @@ $currentDate = date('m-d-Y');
 echo $currentDate;
 
 
-    if(isset($_POST["submit"])){
+    if(isset($_POST["Create Request"])){
     
         $startDate = mysqli_real_escape_string($connection, $_POST["startDate"]);
         $endDate = mysqli_real_escape_string($connection, $_POST["endDate"]);
@@ -61,7 +61,9 @@ echo $currentDate;
             <input type="text" name= "startDate" class="datepicker1" value=<?php echo $endDate;?>>
             <div class="red-text"> <?php echo $endDate_error;?></div>
 
-            <div class ="center"> <input type="submit" value="Create Request" class = "btn brand z-depth-0"> </div>
+            <div class ="center">
+                <input type="submit" name ="Create Request" value="Create Request" class = "btn brand z-depth-0">
+            </div>
         </form>
     </section>
 
