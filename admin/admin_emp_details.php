@@ -315,7 +315,7 @@
 
     <?php else: ?>
 
-        <h5> No such appoitment found!</h5>
+        <h5> No such person found!</h5>
 
     <?php endif?>
 
