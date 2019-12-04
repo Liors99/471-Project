@@ -43,13 +43,13 @@
 
                 ?>
                 <tr onclick="window.location='<?php echo $output_string;?>';">
-                    <td> <?php echo $req["type"]?> </td>
-                    <td> <?php echo $req["req_num"]?> </td>
-                    <td> <?php echo $req["start_time"]?> </td>
-                    <td> <?php echo $req["end_time"]?> </td>
-                    <td> <?php echo $req["date_submitted"]?> </td>
-                    <td> <?php echo $req["start_date"]?> </td>
-                    <td> <?php echo $req["end_date"]?> </td>
+                    <td> <?php echo htmlspecialchars ($req["type"])?> </td>
+                    <td> <?php echo htmlspecialchars ($req["req_num"])?> </td>
+                    <td> <?php echo htmlspecialchars ($req["start_time"])?> </td>
+                    <td> <?php echo htmlspecialchars ($req["end_time"])?> </td>
+                    <td> <?php echo htmlspecialchars ($req["date_submitted"])?> </td>
+                    <td> <?php echo htmlspecialchars ($req["start_date"])?> </td>
+                    <td> <?php echo htmlspecialchars ($req["end_date"])?> </td>
 
                 </tr>
             <?php endforeach?>

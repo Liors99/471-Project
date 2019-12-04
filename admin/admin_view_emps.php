@@ -30,9 +30,9 @@
     
                 ?>
                 <tr onclick="window.location='<?php echo $output_string;?>';">
-                    <td> <?php echo $emp["Employee_ID"]?> </td>
-                    <td> <?php echo $emp["FName"]?> </td>
-                    <td> <?php echo $emp["LName"]?> </td>
+                    <td> <?php echo htmlspecialchars($emp["Employee_ID"])?> </td>
+                    <td> <?php echo htmlspecialchars($emp["FName"])?> </td>
+                    <td> <?php echo htmlspecialchars($emp["LName"])?> </td>
     
                 </tr>
             <?php endforeach?>

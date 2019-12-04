@@ -30,21 +30,19 @@
         if(isset($_POST["submit"])){
         
             $emp_id = $res[0]["Employee_ID"];
-            $emp_fn = $_POST["fname"];
-            $emp_ln = $_POST["lname"];
-            $emp_phone = $_POST["phone"];
-            $emp_jobtype = $_POST["jobType"];
-            $emp_startdate = $_POST["startDate"];
-            $emp_wage = $_POST["wage"];
-            $emp_email = $_POST["email"];
+            $emp_fn = mysqli_real_escape_string($connection,$_POST["fname"]);
+            $emp_ln = mysqli_real_escape_string($connection, $_POST["lname"]);
+            $emp_phone = mysqli_real_escape_string($connection, $_POST["phone"]);
+            $emp_jobtype = mysqli_real_escape_string($connection, $_POST["jobType"]);
+            $emp_startdate = mysqli_real_escape_string($connection, $_POST["startDate"]);
+            $emp_wage = mysqli_real_escape_string($connection, $_POST["wage"]);
+            $emp_email = mysqli_real_escape_string($connection, $_POST["email"]);
 
-            $emp_street= $_POST["street"];
-            $emp_house = $_POST["house_num"];
-            $emp_city= $_POST["city"];
-            $emp_postal= $_POST["postal"];
+            $emp_street= mysqli_real_escape_string($connection, $_POST["street"]);
+            $emp_house = mysqli_real_escape_string($connection, $_POST["house_num"]);
+            $emp_city= mysqli_real_escape_string($connection, $_POST["city"]);
+            $emp_postal= mysqli_real_escape_string($connection, $_POST["postal"]);
 
-
-            echo $emp_fn;
             $isValid = true;
             
             if(empty($_POST["fname"])){
@@ -133,10 +131,6 @@
             }
             else{
                 $street = $_POST["street"];
-                if(!preg_match('/^[a-z,A-Z,\s]*$/', $_POST["street"])){
-                    $street_error="This field must contain only letters";
-                    $isValid=false;
-                }
             }
             
             if(empty($_POST["house_num"])){
@@ -180,17 +174,17 @@
 
                 //Update basic attributes
                 $sql = "UPDATE employee SET 
-                        FName = '$fname',
-                        LName = '$lname',
-                        phone_number = '$phone',
-                        job_type = '$job_type',
-                        start_date = '$start_date',
-                        hourly_wage = '$wage',
-                        email = '$email',
-                        adr_street = '$street',
-                        adr_housenumber = '$house_num',
-                        adr_city = '$city',
-                        adr_postalcode = '$postal'
+                        FName = '$emp_fn',
+                        LName = '$emp_ln',
+                        phone_number = '$emp_phone',
+                        job_type = '$emp_jobtype',
+                        start_date = '$emp_startdate',
+                        hourly_wage = '$emp_wage',
+                        email = '$emp_email',
+                        adr_street ='$emp_street',
+                        adr_housenumber = '$emp_house',
+                        adr_city = '$emp_city',
+                        adr_postalcode = '$emp_postal'
 
                         WHERE Employee_ID = '$id'
                     ";
