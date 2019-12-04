@@ -38,6 +38,18 @@
     $emp_vac="";
 
     if(isset($_POST["submit"])){
+
+        $emp_id=rand();
+        while(true){
+            $sql = "SELECT * FROM employee WHERE Employee_ID = '$emp_id'";
+            $res = getQueryResults($sql);
+            if(sizeof($res)==0){
+                break;
+            }
+            $emp_id=rand();
+        }
+        
+        
     
         $emp_user=mysqli_real_escape_string($connection,$_POST["username"]);
         $emp_pass=mysqli_real_escape_string($connection,$_POST["password"]);
@@ -217,9 +229,6 @@
         
 
         if($isValid){
-            echo "INPUT IS VALID";
-
-            $emp_id=uniqid();
             echo $emp_id;
             
             $sql = "INSERT INTO employee(Employee_ID,username, password_hash,FName, LName, phone_number, job_type, start_date, hourly_wage, email, adr_street, adr_housenumber,adr_city,adr_postalcode) 
@@ -250,10 +259,10 @@
 <html>
 <?php include ("logged_admin_header.php"); ?>
 
-    <form class ="white" action="admin_add_user.php?>" method="POST"> 
+    <form class ="white" action="admin_add_user.php" method="POST"> 
 
         <label> Username </label>
-        <input type="text" name="username" value='<?php echo $emp_fn;?>'>
+        <input type="text" name="username" value='<?php echo $emp_user;?>'>
         <div class="red-text"> <?php echo $username_error;?></div>
 
         <label> Password: </label>
