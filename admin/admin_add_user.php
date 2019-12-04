@@ -140,13 +140,13 @@
         }
 
         if(empty($_POST["wage"])){
-            $phone_error="This field cannot be empty";
+            $wage_error="This field cannot be empty";
             $isValid=false;
         }
         else{
             $wage = $_POST["wage"];
-            if(!preg_match("/^[0-9]*$/", $_POST["phone"])){
-                $phone_error="Please provide a valid wage";
+            if(!preg_match("/^[0-9]*$/", $_POST["wage"])){
+                $wage_error="Please provide a valid wage";
                 $isValid=false;
             }
         }
@@ -229,8 +229,6 @@
         
 
         if($isValid){
-            echo $emp_id;
-            
             $sql = "INSERT INTO employee(Employee_ID,username, password_hash,FName, LName, phone_number, job_type, start_date, hourly_wage, email, adr_street, adr_housenumber,adr_city,adr_postalcode) 
                         VALUES ('$emp_id','$emp_user','$emp_pass','$emp_fn','$emp_ln','$emp_phone','$emp_jobtype','$emp_startdate','$emp_wage','$emp_email','$emp_street', '$emp_house' , '$emp_city', '$emp_postal')" ;
 

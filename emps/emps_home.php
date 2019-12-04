@@ -1,7 +1,15 @@
-<html>
- <?php include ("logged_emp_header.php"); ?> ?>
+<?php 
+    require("../config/db_connect.php");
+    require("emp_session.php");
+?>
 
- <div class="center">
+<html>
+ <?php 
+    include ("logged_emp_header.php"); 
+    
+ ?>
+
+<div class="center">
     <a href="emps_appointments.php" class="waves-effect waves-light btn-large">View Appointments</a>
 </div>
 

@@ -21,9 +21,6 @@
     mysqli_close($connection);
 
 
-    $emp_id=uniqid();
-    echo $emp_id;
-
 ?>
 
 

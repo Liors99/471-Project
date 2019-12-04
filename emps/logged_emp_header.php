@@ -27,10 +27,7 @@
 </head>
 
 <html>
-<?php
-    session_start();
-    $user = $_SESSION["currentUser"]; 
-    echo $user?>
+
 </html>
 
 <body class = "blue lighten-5">

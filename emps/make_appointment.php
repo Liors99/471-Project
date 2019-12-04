@@ -1,5 +1,6 @@
 <?php
 require("../config/db_connect.php");
+require("emp_session.php");
 
 
 $apptDate_error="";
@@ -9,10 +10,10 @@ $apptDate= "";
 $startTime = "";
 $endTime = "";
 
-$currentDate = date('m-d-Y');
+$currentDate = date('Y-m-d');
 echo $currentDate;
 
-    if(isset($_POST["Create Request"])){
+    if(isset($_POST["submit"])){
     
         $apptDate = mysqli_real_escape_string($connection, $_POST["startDate"]);
         $startTime = mysqli_real_escape_string($connection, $_POST["startTime"]);
@@ -43,10 +44,16 @@ echo $currentDate;
         }
 
         if($isValid){
-            echo "INPUT IS VALID";
             //Insert basic attributes
             $sql = "INSERT INTO `appointment` (`Employee_ID`, `appt_date`, `start_time`, `end_time`, `date_requested`, `approved_flag`)
-            VALUES ('$id', '$apptDate', '$startTime', '$endTime', '$currentDate', '-1')";
+            VALUES ('$this_user_id', '$apptDate', '$startTime', '$endTime', '$currentDate', '-1')";
+            execQuery($sql);
+
+
+            //Insert into request
+            $sql = "INSERT INTO 'request' ('Employee_ID', 'type', 'start_time', 'end_time', 'date_submitted', 'start_date', 'end_date', 'approved_id')
+                VALUES('$this_user_id','apt','$startTime','$endTime','$currentDate', '$apptDate','$apptDate', 'NULL')";
+            
             execQuery($sql);
         }
     }
@@ -60,7 +67,7 @@ echo $currentDate;
     <section class= "container grey-text">
         <h4 class="center"> Create Appointment </h4>
 
-        <form class ="white" action="make_appointment.php?id=<?php echo $id?>" method="POST"> 
+        <form class ="white" action="make_appointment.php" method="POST"> 
 
             <label > Appointment date: </label>
             <input type="text" name= "startDate" class="datepicker" value=<?php echo $apptDate;?>>
@@ -74,7 +81,9 @@ echo $currentDate;
             <input type="text" name= "endTime" class="timepicker1" value=<?php echo $endTime;?>>
             <div class="red-text"> <?php echo $endTime_error;?></div>
 
-            <div class ="center"> <input type="submit" value="Create Request" class = "btn brand z-depth-0"> </div>
+            <div class ="center"> 
+                <input type="submit" value="submit" name="submit" class = "btn brand z-depth-0"> 
+            </div>
         </form>
     </section>
 

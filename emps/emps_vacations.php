@@ -2,7 +2,11 @@
 <html>
  <?php 
  require("../config/db_connect.php");
- include ("logged_emp_header.php"); ?> ?>
+ include ("logged_emp_header.php"); 
+ require("emp_session.php");
+ 
+ 
+ ?> ?>
 
 <table>
 	<tr>

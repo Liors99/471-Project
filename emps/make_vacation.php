@@ -1,5 +1,6 @@
 <?php
 require("../config/db_connect.php");
+require("emp_session.php");
 
 $startDate_error="";
 $endDate_error="";
@@ -37,7 +38,7 @@ echo $currentDate;
             echo "INPUT IS VALID";
             //Insert basic attributes
             $sql = "INSERT INTO `vacation` (`Employee_ID`, `start_date`, `end_date`, `date_requested`, `approved_flag`)
-             VALUES ('$id', '$startDate', '$endDate', '$currentDate', '-1')";
+             VALUES ('$this_user_id', '$startDate', '$endDate', '$currentDate', '-1')";
             execQuery($sql);
         }
     }
