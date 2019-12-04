@@ -1,13 +1,22 @@
 
 <html>
  <?php 
- require("../config/db_connect.php");
- include ("logged_emp_header.php"); 
- require("emp_session.php");
+    require("../config/db_connect.php");
+    require("emp_session.php");
+    include ("logged_emp_header.php");
+    
+    
+     //Make query
+     $sql = "SELECT appt_date, start_time, end_time, date_requested, approved_flag FROM appointment"; // WHERE Employee_ID = session.getAttribute?username " ; //MIND THE SINGLE QUOUTE
+
+     //get results
+     $results = getQueryResults($sql);
+    
  ?>
 
-<table>
-	<tr>
+<table class="centered">
+    <thead>
+    <tr>
 		<th>Type </th>	<!-- These Are the Headers -->
 		<th>Appointment Date</th>
 		<th>Apointment time</th>
@@ -15,45 +24,42 @@
         <th>Date Submitted</th>
 		<th>Approval</th>
 	</tr>
-        <?php 
-        
-            //Make query
-            $sql = "SELECT appt_date, start_time, end_time, date_requested, approved_flag FROM appointment"; // WHERE Employee_ID = session.getAttribute?username " ; //MIND THE SINGLE QUOUTE
+    </thead>
 
-            //get results
-            $results = mysqli_query($connection, $sql);
-
-            //fetch resulting rows as arrays
-            //$emps = mysqli_fetch_all($results, MYSQLI_ASSOC);
-            while($result = mysqli_fetch_assoc($results)) {
-
+    <tbody>
+    <?php  foreach($results as $result):
                 $aDate = ($result["appt_date"]);
                 $sTime = ($result["start_time"]);
                 $eTime = ($result["end_time"]);
                 $rDate = ($result["date_requested"]);
-                $approved = ($result["approved_flag"]);
-                ?>
-                <br/>
-                <tr>
-                <td>Name or ID</td>
-			    <td><p><?php echo $aDate?></p?></td>
-				<td><p><?php echo $sTime?></p?></td>
-				<td><p><?php echo $eTime?></p?></td>
-                <td><p><?php echo $rDate?></p?></td>
-                <td><p><?php echo $approved?></p?></td>
-				</tr>
-           <?php } ?>
 
-            
+                $approved="";
+                if($result["approved_flag"]==0){
+                    $approved = "DENIED";
+                }
+                elseif($result["approved_flag"]==1){
+                    $approved = "APPROVED";
+                }
+                else{
+                    $approved = "NOT YET REVIEWED";
+                }
 
-        <?php
-            //Free result from memory
-            mysqli_free_result($results);
-
-            //Close connection to database
-            mysqli_close($connection);
-        
+                
         ?>
+            <tr>
+                <td>Appoitment</td>
+                <td> <?php echo $aDate?></td>
+                <td> <?php echo $sTime?></td>
+                <td> <?php echo $eTime?></td>
+                <td> <?php echo $rDate?></td>
+                <td> <?php echo $approved?></td>
+            </tr>
+        <?php endforeach ?>
+    
+    
+    </tbody>
+	
+        
 	</table>
 
 <?php include ("../templates/footer.php") ; ?>

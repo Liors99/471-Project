@@ -11,7 +11,6 @@ $startTime = "";
 $endTime = "";
 
 $currentDate = date('Y-m-d');
-echo $currentDate;
 
     if(isset($_POST["submit"])){
     
@@ -33,14 +32,27 @@ echo $currentDate;
             $isValid=false;
         }
         else{
-            $startTime = $_POST["startTime"];
+            $startTime_decoded= new DateTime($_POST["startTime"]);
         
         }if(empty($_POST["endTime"])){
             $endTime_error="This field cannot be empty";
             $isValid=false;
         }
         else{
-            $endTime = $_POST["endTime"];
+            
+            $endTime_decoded = new DateTime($_POST["endTime"]);
+            if($isValid){
+                $time_diff = $endTime_decoded -> diff($startTime_decoded);
+                if($time_diff->format("%H") > 0){
+                    echo "TIME IS FINE";
+                }
+                else{
+                    $isValid=false;
+                } 
+
+            }
+
+            
         }
 
         if($isValid){
@@ -51,9 +63,8 @@ echo $currentDate;
 
 
             //Insert into request
-            $sql = "INSERT INTO 'request' ('Employee_ID', 'type', 'start_time', 'end_time', 'date_submitted', 'start_date', 'end_date', 'approved_id')
-                VALUES('$this_user_id','apt','$startTime','$endTime','$currentDate', '$apptDate','$apptDate', 'NULL')";
-            
+            $sql = "INSERT INTO `request` (`Employee_ID`, `req_num`, `type`, `start_time`, `end_time`, `date_submitted`, `start_date`, `end_date`, `approved_id`) 
+                VALUES ('$this_user_id', NULL, 'apt', '$startTime', '$endTime', '$currentDate', '$apptDate', '$apptDate', NULL)";
             execQuery($sql);
         }
     }

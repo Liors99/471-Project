@@ -10,19 +10,19 @@
  ?>
 
 <div class="center">
-    <a href="emps_appointments.php" class="waves-effect waves-light btn-large">View Appointments</a>
+    <a href="emps_appointments.php?id=<?php echo $this_user_id?>" class="waves-effect waves-light btn-large">View Appointments</a>
 </div>
 
 <div class="center">
-    <a href="emps_vacations.php" class="waves-effect waves-light btn-large">View Vacations</a>
+    <a href="emps_vacations.php?id=<?php echo $this_user_id?>" class="waves-effect waves-light btn-large">View Vacations</a>
 </div>
 
 <div class="center">
-    <a href="make_appointment.php" class="waves-effect waves-light btn-large">Create Appointment</a>
+    <a href="make_appointment.php?id=<?php echo $this_user_id?>" class="waves-effect waves-light btn-large">Create Appointment</a>
 </div>
 
 <div class="center">
-    <a href="make_vacation.php" class="waves-effect waves-light btn-large">Create Vacation</a>
+    <a href="make_vacation.php?id=<?php echo $this_user_id?> " class="waves-effect waves-light btn-large">Create Vacation</a>
 </div>
 
 <?php include ("../templates/footer.php") ; ?>
