@@ -3,6 +3,11 @@
     require("../config/db_connect.php");
     require("admin_session.php");
 
+
+    if(isset($_POST["submit"])){
+        
+    }
+
     //Check GET request ID parameter
     if(isset($_GET["id"])){
         $id = mysqli_real_escape_string($connection , $_GET["id"]);
@@ -20,12 +25,23 @@
         $emp_wage = $res[0]["hourly_wage"];
         $emp_email = $res[0]["email"];
 
+
+        $sql = "SELECT * FROM admin WHERE Employee_ID = '$id'";
+
+
+        print_r( sizeof(getQueryResults($sql)) );
+        
+        if( sizeof(getQueryResults($sql))!=0 ){
+            $isAdmin = "Admin";
+        }
+        else{
+            $isAdmin="Employee";
+        }
+
        
     }
 
-    if(isset($_POST["submit"])){
-        
-    }
+    
 
 ?>
 
@@ -36,7 +52,7 @@
 
     <?php if($res): ?>
 
-        <form class ="white" action="admin_emp_details.php" method="POST"> 
+        <form class ="white" action="admin_emp_details.php?id=<?php echo $id?>" method="POST"> 
             <label > Fist Name: </label>
             <input type="text" name="fname" value=<?php echo $emp_fn;?> >
 
@@ -47,21 +63,25 @@
             <input type="text" name="phone" value=<?php echo $emp_phone;?>>
 
             <label > Email: </label>
-            <input type="text" name="lname" value=<?php echo $emp_email;?>>
+            <input type="text" name="email" value=<?php echo $emp_email;?>>
 
             <label > Job Type: </label>
-            <input type="text" name="lname" value=<?php echo $emp_jobtype;?>>
+            <input type="text" name="jobType" value=<?php echo $emp_jobtype;?>>
 
             <label > Hourly Wage: </label>
-            <input type="text" name="lname" value=<?php echo $emp_wage;?>>
+            <input type="text" name="wage" value=<?php echo $emp_wage;?>>
 
             <label > Start date: </label>
-            <input type="text" id="date" class="datepicker" value=<?php echo $emp_startdate;?>>
+            <input type="text" name= "startDate" class="datepicker" value=<?php echo $emp_startdate;?>>
 
+            <label>Select position: </label>
+            <select class="browser-default">
+                <option value="1">Employee </option>
+                <option value="2">Admin</option>
+            </select>
 
             <div class="center">
                 <input type="submit" name = "submit" value="submit" class = "btn brand z-depth-0">
-
             </div>
 
         </form>
