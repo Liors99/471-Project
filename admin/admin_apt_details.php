@@ -71,7 +71,7 @@
         </h4>
 
 
-        <form class ="blue lighten-5" action="admin_apt_details.php?id=<?php echo $emp_id?> " method="POST">
+        <form class ="blue lighten-5" action="admin_apt_details.php?id=<?php echo $emp_id?>&startDate=<?php echo $startDate?>&startTime=<?php echo $startTime?> " method="POST">
             <div class="center">
                 <input type="submit" name = "approve" value="approve" class = "btn green z-depth-0">
                 <input type="submit" name = "deny" value="deny" class = "btn red z-depth-0">
