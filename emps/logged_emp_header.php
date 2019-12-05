@@ -27,8 +27,18 @@
 </head>
 
 <html>
-
-</html>
+<style>
+div.linkButtons{text-align: center;width: 100%;padding: 5px;} 
+div.buttonMenu{
+        padding: 100px;
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;}
+</style>
+</html>>
 
 <body class = "blue lighten-5">
     <nav class = "blue lighten-3 z-depth-0">

@@ -14,7 +14,7 @@ else{
     //Check if it is an admin
     $sql = "SELECT * FROM admin WHERE Employee_ID = '$this_user_id'";
     $res=getQueryResults($sql);
-    if(sizeof($res)==0){
+    if(!$res){
         http_response_code(403);
         die('Forbidden');
     }

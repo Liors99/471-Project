@@ -1,4 +1,10 @@
-<footer class ="section">
+<html>
+<style>
+footer.foot {position: fixed;bottom: 0;text-align: center;width: 100%;}
+</style>
+</html>
+
+<footer class ="foot" >
     <div class="center grey-text"> GROUP 11 CPSC 471 PROJECT</div>
 </footer>
 
