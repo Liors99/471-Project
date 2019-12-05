@@ -17,6 +17,11 @@
     $city_error="";
     $postal_error="";
 
+    $vac_error="";
+
+
+    $adm_error="";
+    $adm_title="";
 
 
     //Check GET request ID parameter
@@ -26,6 +31,24 @@
         $sql =  "SELECT * FROM employee WHERE Employee_ID = '$id'";
 
         $res = getQueryResults($sql);
+
+        $sql = "SELECT total FROM vacation_days WHERE Employee_ID='$id'";
+        $vac_days_toal = getQueryResults($sql)[0]["total"];
+
+
+        $deal_with_adm_error=false;
+        $sql= "SELECT * FROM admin WHERE Employee_ID='$id'";
+        $admins = getQueryResults($sql);
+        if(sizeof($admins)!=0){
+            $adm_title=$admins[0]["position_title"];
+            $deal_with_adm_error=true;
+        }
+
+        if($_POST["position"]){
+            $deal_with_adm_error=true;
+        }
+        
+        
 
         if(isset($_POST["submit"])){
         
@@ -42,6 +65,12 @@
             $emp_house = mysqli_real_escape_string($connection, $_POST["house_num"]);
             $emp_city= mysqli_real_escape_string($connection, $_POST["city"]);
             $emp_postal= mysqli_real_escape_string($connection, $_POST["postal"]);
+
+
+
+            $emp_vac=mysqli_real_escape_string($connection, $_POST["vac"]);
+
+            $emp_title = mysqli_real_escape_string($connection, $_POST["adm_title"]);
 
             $isValid = true;
             
@@ -169,8 +198,27 @@
                 }
             }
 
+
+            if(empty($_POST["vac"])){
+                $vac_error ="This field cannot be empty";
+                $isValid=false;
+            }
+            else{
+                if(!preg_match("/^[0-9]*$/", $_POST["vac"])){
+                    $vac_error="Please provide a valid number of vacation days";
+                    $isValid=false;
+                }
+            }
+
+
+            if(empty($_POST["adm_title"]) && $deal_with_adm_error){
+                $adm_error ="This field cannot be empty";
+                $adm_title="";
+                $isValid=false;
+            }
+
             if($isValid){
-                echo "INPUT IS VALID";
+
 
                 //Update basic attributes
                 $sql = "UPDATE employee SET 
@@ -191,6 +239,10 @@
 
                 execQuery($sql);
 
+                //Update vacation days
+                $sql = "UPDATE vacation_days SET total='$emp_vac' WHERE Employee_ID = '$id'";
+                execQuery($sql);
+
                 if($_POST["position"]=="emp"){
                     //Check if we are "demoting the user"
                     $sql = "SELECT * FROM admin where Employee_ID='$id'";
@@ -204,9 +256,15 @@
                     //Check if we are "promoting the user"
                     $sql = "SELECT * FROM admin where Employee_ID='$id'";
                     if( sizeof(getQueryResults($sql))==0 ){
-                        $sql = "INSERT INTO admin  VALUES ('$id', 'some time')"; //NEED TO CHANGE THE ADMIN TITLE
+                        $sql = "INSERT INTO admin  VALUES ('$id', '$emp_title')"; //NEED TO CHANGE THE ADMIN TITLE
                         execQuery($sql);
                     }
+                    else{
+                        $sql="UPDATE admin SET position_title='$emp_title' WHERE Employee_ID='$id'";
+                        execQuery($sql);
+                    }
+
+                    $adm_title=$emp_title;
 
                 }
 
@@ -228,6 +286,8 @@
             $emp_city= $res[0]["adr_city"];
             $emp_postal= $res[0]["adr_postalcode"];
 
+            $emp_vac=$vac_days_toal;
+
         }
 
     $sql = "SELECT * FROM admin WHERE Employee_ID = '$id'";
@@ -239,7 +299,6 @@
         $isAdmin=false;
     }
 
-        
 
        
     }
@@ -301,11 +360,19 @@
             <input type="text" name="postal" value=<?php echo $emp_postal;?>>
             <div class="red-text"> <?php echo $postal_error;?></div>
 
+            <label > Vacation days: </label>
+            <input type="text" name="vac" value=<?php echo $emp_vac;?>>
+            <div class="red-text"> <?php echo $vac_error;?></div>
+
             <label>Select position: </label>
             <select class="browser-default" name="position">
                 <option value="emp" <?php if(!$isAdmin){ echo ("selected"); }?>>Employee </option>
                 <option value="adm" <?php if($isAdmin){ echo ("selected"); }?>>Admin </option>
             </select>
+
+            <label > Admin title (ONLY IF ADMIN IS SELECTED): </label>
+            <input type="text" name="adm_title" value='<?php echo $adm_title;?>'>
+            <div class="red-text"> <?php echo $adm_error;?></div>
 
             <div class="center">
                 <input type="submit" name = "submit" value="submit" class = "btn brand z-depth-0">

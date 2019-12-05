@@ -18,6 +18,10 @@
 </div>
 
 <div class="center">
+    <a href="emp_view_performance.php" class="waves-effect waves-light btn-large">View Performance Reviews</a>
+</div>
+
+<div class="center">
     <a href="make_appointment.php?id=<?php echo $this_user_id?>" class="waves-effect waves-light btn-large">Create Appointment</a>
 </div>
 

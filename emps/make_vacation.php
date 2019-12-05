@@ -8,6 +8,9 @@ $endDate_error="";
 $startDate= "";
 $endDate = "";
 
+$submit_error="";
+$submit_confirm="";
+
 $currentDate = date('Y-m-d');
 
 
@@ -42,22 +45,28 @@ $currentDate = date('Y-m-d');
 
                 $days_allowed = $res[0]["total"] - $res[0]["used"];
 
-                echo $days_allowed;
-
-                if($diff > $days_allowed){
-                    echo "YOU HAVE USED ALL YOUR DAYS";
+                if(($diff + 1) > $days_allowed){
+                    $submit_error = "VACATION TIME EXCEEDS YOUR OFF DAYS";
                     $isValid=false;
                 }
                 elseif($diff < 0){
-                    echo "NOT VALID";
+                    $submit_error = "NOT VALID DAYS SELECTED";
                     $isValid=false;
                 }
 
             }
         }
 
+
+        //See if there is an overlap with vacation
+        $sql = "SELECT * FROM vacation WHERE start_date = '$startDate' AND Employee_ID='$this_user_id'";
+        $res=getQueryResults($sql);
+        if(sizeof($res)!=0){
+            $submit_error = "YOU ALREADY HAVE A VACATION STARTING AT THIS DATE";
+            $isValid = false;
+        }
+
         if($isValid){
-            echo "INPUT IS VALID";
             //Insert basic attributes
             $sql = "INSERT INTO `vacation` (`Employee_ID`, `start_date`, `end_date`, `date_requested`, `approved_flag`)
              VALUES ('$this_user_id', '$startDate', '$endDate', '$currentDate', '-1')";
@@ -70,8 +79,12 @@ $currentDate = date('Y-m-d');
             VALUES ('$this_user_id', NULL, 'vac', '$dummy_time', '$dummy_time', '$currentDate', '$startDate', '$endDate', NULL)";
             execQuery($sql);
 
-            $sql="UPDATE vacation_days SET used='$diff' WHERE Employee_ID='$this_user_id'";
+            $new_used= $res[0]["used"] + $diff + 1;
+
+            $sql="UPDATE vacation_days SET used='$new_used' WHERE Employee_ID='$this_user_id'";
             execQuery($sql);
+
+            $submit_confirm="VACATION REQUEST HAS BEEN SENT";
         }
     }
 
@@ -97,6 +110,9 @@ $currentDate = date('Y-m-d');
             <div class ="center">
                 <input type="submit" name ="submit" value="submit" class = "btn brand z-depth-0">
             </div>
+
+            <div class="red-text"> <?php echo $submit_error;?></div>
+            <div class="green-text"> <?php echo $submit_confirm;?></div>
         </form>
     </section>
 

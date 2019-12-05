@@ -37,6 +37,10 @@
 
     $emp_vac="";
 
+    $adm_title="";
+    $adm_error="";
+    
+
     if(isset($_POST["submit"])){
 
         $emp_id=rand();
@@ -47,6 +51,12 @@
                 break;
             }
             $emp_id=rand();
+        }
+
+
+        $deal_with_adm_error=false;
+        if($_POST["position"]){
+            $deal_with_adm_error=true;
         }
         
         
@@ -67,6 +77,8 @@
         $emp_postal= mysqli_real_escape_string($connection, $_POST["postal"]);
 
         $emp_vac=mysqli_real_escape_string($connection, $_POST["vac"]);
+
+        $adm_title=mysqli_real_escape_string($connection, $_POST["adm_title"]);
 
         $isValid = true;
         
@@ -216,7 +228,7 @@
         }
 
         if(empty($_POST["vac"])){
-            $houseNum_error ="This field cannot be empty";
+            $vac_error ="This field cannot be empty";
             $isValid=false;
         }
         else{
@@ -224,6 +236,11 @@
                 $vac_error="Please provide a valid number of vacation days";
                 $isValid=false;
             }
+        }
+
+        if(empty($_POST["adm_title"]) && $deal_with_adm_error){
+            $adm_error ="This field cannot be empty";
+            $isValid=false;
         }
 
         
@@ -238,7 +255,7 @@
                 //Check if we are "promoting the user"
                 $sql = "SELECT * FROM admin where Employee_ID='$emp_id'";
                 if( sizeof(getQueryResults($sql))==0 ){
-                    $sql = "INSERT INTO admin  VALUES ('$emp_id', 'some time')"; //NEED TO CHANGE THE ADMIN TITLE
+                    $sql = "INSERT INTO admin  VALUES ('$emp_id', '$adm_title')"; //NEED TO CHANGE THE ADMIN TITLE
                     execQuery($sql);
                 }
 
@@ -321,6 +338,10 @@
             <option value="emp">Employee </option>
             <option value="adm">Admin </option>
         </select>
+
+        <label > Admin title (ONLY IF ADMIN IS SELECTED): </label>
+        <input type="text" name="adm_title" value='<?php echo $adm_title;?>'>
+        <div class="red-text"> <?php echo $adm_error;?></div>
 
         <div class="center">
             <input type="submit" name = "submit" value="submit" class = "btn brand z-depth-0">
