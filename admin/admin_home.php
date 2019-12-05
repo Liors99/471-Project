@@ -12,7 +12,7 @@
 </div>
 
 <div class="center">
-    <a href="admin_add_performance.php" class="waves-effect waves-light btn-large">Add a perofrmance review</a>
+    <a href="admin_add_performance.php" class="waves-effect waves-light btn-large">Add a performance review</a>
 </div>
 
 <div class="center">
