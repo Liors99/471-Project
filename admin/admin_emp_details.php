@@ -73,6 +73,8 @@
             if($_POST["position"]=="adm"){
                 $deal_with_adm_error=true;
             }
+
+            
             
             if(empty($_POST["fname"])){
                 $fname_error="This field cannot be empty";
