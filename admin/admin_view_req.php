@@ -22,6 +22,7 @@
                 <th>Date Submitted</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th> Status </th>
             </tr>
 
         </thead>
@@ -50,6 +51,8 @@
                     <td> <?php echo htmlspecialchars ($req["date_submitted"])?> </td>
                     <td> <?php echo htmlspecialchars ($req["start_date"])?> </td>
                     <td> <?php echo htmlspecialchars ($req["end_date"])?> </td>
+                    <td> <?php if($req["approved_id"] == NULL){ echo "NOT REVIEWED";}
+                                else{echo "REVIEWED";}?> </td>
 
                 </tr>
             <?php endforeach?>

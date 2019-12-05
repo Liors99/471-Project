@@ -41,9 +41,9 @@ $currentDate = date('Y-m-d');
                 $diff = ($endDate_encoded- $startDate_encoded)/60/60/24;
                 
                 $sql = "SELECT total,used FROM vacation_days WHERE Employee_ID = '$this_user_id'";
-                $res = getQueryResults($sql);
+                $vac_table = getQueryResults($sql);
 
-                $days_allowed = $res[0]["total"] - $res[0]["used"];
+                $days_allowed = $vac_table[0]["total"] - $vac_table[0]["used"];
 
                 if(($diff + 1) > $days_allowed){
                     $submit_error = "VACATION TIME EXCEEDS YOUR OFF DAYS";
@@ -79,7 +79,7 @@ $currentDate = date('Y-m-d');
             VALUES ('$this_user_id', NULL, 'vac', '$dummy_time', '$dummy_time', '$currentDate', '$startDate', '$endDate', NULL)";
             execQuery($sql);
 
-            $new_used= $res[0]["used"] + $diff + 1;
+            $new_used= $vac_table[0]["used"] + $diff + 1;
 
             $sql="UPDATE vacation_days SET used='$new_used' WHERE Employee_ID='$this_user_id'";
             execQuery($sql);
