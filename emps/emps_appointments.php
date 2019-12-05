@@ -47,7 +47,7 @@
                 
         ?>
             <tr>
-                <td>Appoitment</td>
+                <td>Appointment</td>
                 <td> <?php echo $aDate?></td>
                 <td> <?php echo $sTime?></td>
                 <td> <?php echo $eTime?></td>
