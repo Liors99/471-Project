@@ -308,11 +308,11 @@
         <input type="text" name="wage" value=<?php echo $emp_wage;?>>
         <div class="red-text"> <?php echo $wage_error;?></div>
 
-        <label > Start date: </label>
+        <label > Start Date: </label>
         <input type="text" name= "startDate" class="datepicker" value=<?php echo $emp_startdate;?>>
         <div class="red-text"> <?php echo $startDate_error;?></div>
 
-        <label > House number: </label>
+        <label > House Number: </label>
         <input type="text" name="house_num" value=<?php echo $emp_house;?>>
         <div class="red-text"> <?php echo $houseNum_error;?></div>
 
@@ -329,17 +329,17 @@
         <div class="red-text"> <?php echo $postal_error;?></div>
 
 
-        <label > Vacation days: </label>
+        <label > Vacation Days: </label>
         <input type="text" name="vac" value=<?php echo $emp_vac;?>>
         <div class="red-text"> <?php echo $vac_error;?></div>
 
-        <label>Select position: </label>
+        <label>Select Position: </label>
         <select class="browser-default" name="position">
             <option value="emp">Employee </option>
             <option value="adm">Admin </option>
         </select>
 
-        <label > Admin title (ONLY IF ADMIN IS SELECTED): </label>
+        <label > Admin Title (ONLY IF ADMIN IS SELECTED): </label>
         <input type="text" name="adm_title" value='<?php echo $adm_title;?>'>
         <div class="red-text"> <?php echo $adm_error;?></div>
 

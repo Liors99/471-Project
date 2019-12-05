@@ -27,7 +27,7 @@
     <?php include ("logged_admin_header.php"); ?>
 
     <section class= "container grey-text">
-        <h4 class="center"> Create Vacation </h4>
+        <h4 class="center"> Create Performance Review </h4>
 
         <form class ="white" action="admin_add_performance.php" method="POST"> 
 
