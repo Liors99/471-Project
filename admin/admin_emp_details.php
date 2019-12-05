@@ -43,10 +43,6 @@
             $adm_title=$admins[0]["position_title"];
             $deal_with_adm_error=true;
         }
-
-        if($_POST["position"]){
-            $deal_with_adm_error=true;
-        }
         
         
 
@@ -73,6 +69,10 @@
             $emp_title = mysqli_real_escape_string($connection, $_POST["adm_title"]);
 
             $isValid = true;
+
+            if($_POST["position"]=="adm"){
+                $deal_with_adm_error=true;
+            }
             
             if(empty($_POST["fname"])){
                 $fname_error="This field cannot be empty";
