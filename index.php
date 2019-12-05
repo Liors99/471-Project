@@ -1,4 +1,5 @@
 <?php 
+
     include("templates/header.php"); 
     require("config/db_connect.php");
 
@@ -20,11 +21,15 @@
     //Close connection to database
     mysqli_close($connection);
 
+    
+
 
 ?>
 
 
 <html>
+
+
 <?php  
     include("templates/footer.php");
 ?>
