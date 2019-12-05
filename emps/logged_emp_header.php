@@ -38,7 +38,7 @@ div.buttonMenu{
         max-height:100%;
         overflow:auto;}
 </style>
-</html>>
+</html>
 
 <body class = "blue lighten-5">
     <nav class = "blue lighten-3 z-depth-0">

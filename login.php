@@ -31,14 +31,17 @@
         //If there are no errors (applys lambda function to every element in array, and checks that it is not empty)
         if(!array_filter($errors)){
             
-            $username_passed = mysqli_real_escape_string($connection, $username); //"Sanitize" input (should be changed to prepared statements)
+            $username_passed = mysqli_real_escape_string($connection, $username); //"Sanitize" input
             //Make query
-            $sql = "SELECT password_hash FROM employee WHERE username = '$username_passed' " ; //MIND THE SINGLE QUOUTE
+            $sql = "SELECT password_hash, password_salt FROM employee WHERE username = '$username_passed' " ; //MIND THE SINGLE QUOUTE
 
             $emps = getQueryResults($sql);
 
             if(sizeof($emps) > 0){
-                if($emps[0]["password_hash"] == $password){
+
+                $pwd_hash = hash('sha256', $password . $emps[0]["password_salt"]);
+
+                if($emps[0]["password_hash"] == $pwd_hash){
                     
                     $log_confirm=  "LOGGED IN";
                     $_SESSION["currentUser"] = $username;
@@ -58,11 +61,11 @@
                     
                 }
                 else{
-                    $log_confirm=  "Wrong password";
+                    $log_confirm=  "Wrong username or password";
                 }
             }
             else{
-                $log_confirm= "No such username found";
+                $log_confirm= "Wrong username or password";
             }
 
             //Close connection to database

@@ -40,6 +40,7 @@
     $adm_title="";
     $adm_error="";
     
+    
 
     if(isset($_POST["submit"])){
 
@@ -55,7 +56,7 @@
 
 
         $deal_with_adm_error=false;
-        if($_POST["position"]){
+        if($_POST["position"] == "adm"){
             $deal_with_adm_error=true;
         }
         
@@ -246,8 +247,12 @@
         
 
         if($isValid){
-            $sql = "INSERT INTO employee(Employee_ID,username, password_hash,FName, LName, phone_number, job_type, start_date, hourly_wage, email, adr_street, adr_housenumber,adr_city,adr_postalcode) 
-                        VALUES ('$emp_id','$emp_user','$emp_pass','$emp_fn','$emp_ln','$emp_phone','$emp_jobtype','$emp_startdate','$emp_wage','$emp_email','$emp_street', '$emp_house' , '$emp_city', '$emp_postal')" ;
+            $salt = uniqid(mt_rand(), true);
+
+            $pwd_hash = hash('sha256', $emp_pass.$salt);
+
+            $sql = "INSERT INTO employee(Employee_ID,username, password_hash,password_salt,FName, LName, phone_number, job_type, start_date, hourly_wage, email, adr_street, adr_housenumber,adr_city,adr_postalcode) 
+                        VALUES ('$emp_id','$emp_user','$pwd_hash','$salt','$emp_fn','$emp_ln','$emp_phone','$emp_jobtype','$emp_startdate','$emp_wage','$emp_email','$emp_street', '$emp_house' , '$emp_city', '$emp_postal')" ;
 
             execQuery($sql);
 
@@ -262,6 +267,9 @@
             }
             $sql = "INSERT INTO vacation_days(Employee_ID, total, used) VALUES ('$emp_id', '$emp_vac', '0')";
             execQuery($sql);
+
+
+            echo "<script type='text/javascript'>alert('User has been added to the system');</script>";
 
         }
     }
