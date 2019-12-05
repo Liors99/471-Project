@@ -7,8 +7,7 @@
     
     
      //Make query
-     $sql = "SELECT appt_date, start_time, end_time, date_requested, approved_flag FROM appointment"; // WHERE Employee_ID = session.getAttribute?username " ; //MIND THE SINGLE QUOUTE
-
+     $sql = "SELECT appt_date, start_time, end_time, date_requested, approved_flag FROM appointment WHERE Employee_ID = $this_user_id";
      //get results
      $results = getQueryResults($sql);
     

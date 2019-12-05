@@ -6,8 +6,7 @@
  require("emp_session.php");
  
      //Make query
-     $sql = "SELECT start_date, end_date, date_requested, approved_flag FROM vacation"; // WHERE Employee_ID = session.getAttribute?username " ; //MIND THE SINGLE QUOUTE
-
+     $sql = "SELECT start_date, end_date, date_requested, approved_flag FROM vacation WHERE Employee_ID = $this_user_id";
      $results = getQueryResults($sql);
  
  ?>
