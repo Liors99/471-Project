@@ -28,7 +28,16 @@
 
 
 <html>
+<img src="circle_logo.png" alt="YNOTDIGITAL_LOGO"/>
 
+<style>
+img {
+  padding: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 
 <?php  
     include("templates/footer.php");
