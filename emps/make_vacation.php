@@ -46,10 +46,12 @@ $currentDate = date('Y-m-d');
                 $days_allowed = $vac_table[0]["total"] - $vac_table[0]["used"];
 
                 if(($diff + 1) > $days_allowed){
+                    echo "<script type='text/javascript'>alert('Vacation time has exceeded your off days');</script>";
                     $submit_error = "VACATION TIME EXCEEDS YOUR OFF DAYS";
                     $isValid=false;
                 }
                 elseif($diff < 0){
+                    echo "<script type='text/javascript'>alert('invalid days are selected');</script>";
                     $submit_error = "NOT VALID DAYS SELECTED";
                     $isValid=false;
                 }
@@ -63,6 +65,7 @@ $currentDate = date('Y-m-d');
         $res=getQueryResults($sql);
         if(sizeof($res)!=0){
             $submit_error = "YOU ALREADY HAVE A VACATION STARTING AT THIS DATE";
+            echo "<script type='text/javascript'>alert('You already have a vacation at this date');</script>";
             $isValid = false;
         }
 
@@ -84,6 +87,7 @@ $currentDate = date('Y-m-d');
             $sql="UPDATE vacation_days SET used='$new_used' WHERE Employee_ID='$this_user_id'";
             execQuery($sql);
 
+            echo "<script type='text/javascript'>alert('Vacation request has been sent');</script>";
             $submit_confirm="VACATION REQUEST HAS BEEN SENT";
         }
     }
@@ -111,8 +115,11 @@ $currentDate = date('Y-m-d');
                 <input type="submit" name ="submit" value="submit" class = "btn brand z-depth-0">
             </div>
 
-            <div class="red-text"> <?php echo $submit_error;?></div>
-            <div class="green-text"> <?php echo $submit_confirm;?></div>
+            <!-- 
+            <div class="red-text"> <?php //echo $submit_error;?></div>
+            <div class="green-text"> <?php //echo $submit_confirm;?></div>
+            -->
+            
         </form>
     </section>
 

@@ -21,7 +21,7 @@
 <html>
     <?php include ("logged_admin_header.php"); ?>
     
-    <table class="centered" id="hover_table">
+    <table class="centered">
 
         <thead>
             <tr>

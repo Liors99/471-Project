@@ -32,21 +32,29 @@ $currentDate = date('Y-m-d');
             $isValid=false;
         }
         else{
-            $startTime_decoded= new DateTime($_POST["startTime"]);
+            $startTime_decoded= strtotime($_POST["startTime"]);
         
         }if(empty($_POST["endTime"])){
             $endTime_error="This field cannot be empty";
             $isValid=false;
-        }
+        }      
         else{
+            $sql = "SELECT * FROM appointment WHERE appt_date = '$apptDate' AND start_time = '$startTime' AND Employee_ID = '$this_user_id'";
+            $res = getQueryResults($sql);
+            if(sizeof($res)!=0){
+                echo "<script type='text/javascript'>alert('You already have an appotiment set up at this time!');</script>";
+                $isValid=false;
+            }
             
-            $endTime_decoded = new DateTime($_POST["endTime"]);
+            $endTime_decoded = strtotime($_POST["endTime"]);
             if($isValid){
-                $time_diff = $endTime_decoded -> diff($startTime_decoded);
-                if($time_diff->format("%H") > 0){
-                    echo "TIME IS FINE";
+                $time_diff = intval($endTime_decoded-$startTime_decoded)/60;
+                //echo $endTime_decoded->format("%H");
+                if($time_diff > 0){
+                    echo "<script type='text/javascript'>alert('Appotiment request has been placed');</script>";
                 }
                 else{
+                    echo "<script type='text/javascript'>alert('Start time and end time are invalid');</script>";
                     $isValid=false;
                 } 
 

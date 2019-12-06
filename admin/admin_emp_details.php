@@ -270,6 +270,8 @@
 
                 }
 
+                echo "<script type='text/javascript'>alert('Employee information has been updated');</script>";
+
             }
         }
 

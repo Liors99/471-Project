@@ -19,6 +19,8 @@
             $selected_date = mysqli_real_escape_string($connection, $_POST["date"]);
             $sql = "INSERT INTO `performance_review` (`Employee_ID`, `date`, `supervisor_ID`) VALUES ('$selected_person_id', '$selected_date', '$this_user_id')";
             execQuery($sql);
+
+            echo "<script type='text/javascript'>alert('Performance review has been sent');</script>";
         }
     }
 ?>
